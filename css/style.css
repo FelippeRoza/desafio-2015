@@ -54,6 +54,7 @@ a{
 	font-size: 60%;
 	font-weight: bold;
 }
+
 p.mainPrice{
 	font-size: 150%;
 	color: red;
@@ -66,4 +67,14 @@ p.price{
 
 p.small{
 	font-size: 60%;
+}
+
+h2 {
+    display: block;
+    font-size: 1.5em;
+    -webkit-margin-before: 0.83em;
+    -webkit-margin-after: 0.83em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-weight: bold;
 }
