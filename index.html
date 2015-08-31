@@ -4,7 +4,13 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Loja do Felippe</title>
 	<script src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/data.js" charset="utf-8"></script>
+	<script>
+	var json = null;
+	X = function(receiveddata){json = receiveddata;}
+	</script>
+	<!-- // 
+	<script type="text/javascript" src="js/data.js" charset="utf-8"></script> -->
+	<script type="text/javascript" src="http://roberval.chaordicsystems.com/challenge/challenge.json?callback=X" charset="utf-8"></script>
     <link rel="stylesheet" href="css/style.css" type="text/css" media="screen"> 
 </head>
 <body>
@@ -36,7 +42,7 @@
     </div>
 
 <script>
-	var json = eval(jsonstring);
+	
   	console.log(json);
   	var mainItem = json["data"]["reference"]["item"];
   	var recommendations = json["data"]["recommendation"];
