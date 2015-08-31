@@ -27,16 +27,14 @@
             <p id="mainName"></p>
             <p class = "small" id="mainId"></p>
             <a id = "mainUrl" href="">ir para site</a>
-            <p><del id="mainOldPrice"></del></p>
-            <p class = "mainPrice" id="mainPrice"></p>
-            <p>à vista</p>
-            <p id="mainUrl"></p>
+            <p>De: <del id="mainOldPrice"></del></p>
+            <p>Por: <span class = "mainPrice" id="mainPrice"></span></p>
             <ul id="mainPayment"></ul>
-            
+			<p id = "economia"></p> 
         </div>    
 
         <div id="related">
-        	<br><br><h3>Produtos relacionados</h3>
+        	<br><br><h3>&nbsp;&nbsp;&nbsp;Produtos relacionados</h3>
             <hr>
             <ul id="imagesList"></ul>
         </div>
@@ -45,7 +43,7 @@
             <!-- <p><p> -->
         </div>
     </div>
-
+</body>
 <script>
 	
   	console.log(json);
@@ -61,20 +59,28 @@
     $("#mainUrl").attr("href","http:"+mainItem.detailUrl);
   	$("#mainPrice").text(mainItem.price);
   	$("#mainPayment").append(mainItem["productInfo"].paymentConditions);
+  	if(mainItem.oldPrice != null){
+		diference = +mainItem.oldPrice.replace('R$ ','').replace(',','.') - +mainItem.price.replace('R$ ','').replace(',','.');
+  	  	$("#economia").text('Economia de R$ ' + diference.toFixed(2).replace(".",","));
+  	}
 
-  	//Preenchimento dos produtos recomendados
+  	//Preenchimento da lista de produtos recomendados
     var images_test = {};
     for (var i = recommendations.length - 1; i >= 0; i--) {
     	// images_test['image'+i] = 'http:'+recommendations[i].imageName;
         imageUrl = 'http:'+recommendations[i].imageName;
         description = recommendations[i].name;
+        oldPrice='';
+        if (recommendations[i].oldPrice != null) {
+        	oldPrice = recommendations[i].oldPrice;
+        };        
         price = recommendations[i].price;
         urlRef = recommendations[i].detailUrl;
-        $('#imagesList').append('<div class="floating-box"><img src="' + imageUrl + '" /><a href=http:'+urlRef+'>'+description+'</p><p class="price">'+price+'</p></div>');
+        itemId = recommendations[i].businessId;
+        payment = recommendations[i].productInfo.paymentConditions;
+        $('#imagesList').append('<div class="floating-box"><img src="' + imageUrl + '" /><a href=http:'+urlRef+'>'+description+'</a><p class="small">(Cód. item '+itemId+')</p><div align="center"><del>'+oldPrice+'</del></div><p class="price">'+price+'</p></div>');
     };
 
 </script>
-
-</body>
 
 </html);>

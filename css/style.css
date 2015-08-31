@@ -16,18 +16,19 @@ body  {
 	text-align: center;
     vertical-align: middle;
     display: table-cell;
-	width: 20%;
+	width: 60%;
 	/*height: 150px;*/
 	float: left; 
 }
 #image img {
-        width: 100%;
+        width: 50%;
                 
 }
 
-#mainDescription  {  	
+#mainDescription  {  
+	margin-right: 30px;	
 	float: right;  	
-	width: 75%;  	
+	width: 35%;  	
 	background: #FFFFFF;  
 	}    
 .floating-box {
@@ -55,18 +56,24 @@ a{
 	font-weight: bold;
 }
 
-p.mainPrice{
-	font-size: 150%;
+span.mainPrice{
+	font-size: 200%;
 	color: red;
 	font-weight: bold;
 }
 p.price{
 	font-size: 100%;
-	color: black;
+	color: red;
+	text-align: center;
 }
 
 p.small{
 	font-size: 60%;
+	text-align: left;
+}
+
+p{
+	text-align: justify;
 }
 
 h2 {
