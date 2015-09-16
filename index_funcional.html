@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Loja do Felippe</title>
+
+	<script src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/data.js" charset="utf-8"></script>
+	<!-- // <script src="js/data.js"></script> -->
+
+</head>
+<body>
+
+	<h1>Loja Maneira do Felippe</h1>
+
+	<!-- Estrutura do produto -->
+	<p id="mainName"></p>
+	<img src='' id="mainImage"/>
+	<p id="mainOldPrice"></p>
+	<p id="mainPrice"></p>
+	<p id="mainUrl"></p>
+	<p id="mainPrice"></p>
+	<p id="mainPayment"></p>	
+	
+	<ul id="imagesList"></ul>
+
+<script>
+	var json = eval(jsonstring);
+  	console.log(json);
+  	var mainItem = json["data"]["reference"]["item"];
+  	var recommendations = json["data"]["recommendation"];
+  	
+  	//Preenchimento dos dados do produto principal
+ 
+  	$("#mainName").text(mainItem.name);
+  	$("#mainImage").attr("src",'http:' + mainItem.imageName);
+  	$("#mainOldPrice").text('Preço antigo:' + mainItem.oldPrice);
+  	$("#mainUrl").text(mainItem.datailUrl);
+  	$("#mainPrice").text('Preço novo: ' + mainItem.price + ' à vista');
+  	$("#mainPayment").text(mainItem["productInfo"].paymentConditions);
+
+  	//load image array
+    var images = {};
+    for (var i = recommendations.length - 1; i >= 0; i--) {
+    	images_test['image'+i] = 'http:'+recommendations[i].imageName;
+    };
+  	console.log(images_test);
+  	$.each(images, function(){
+    	$('#imagesList').append('<li><img src="' + this + '" /></li>'); 
+	});
+
+</script>
+
+<p>Sites minimalistas são o futuro</p>
+</body>
+
+</html);>
