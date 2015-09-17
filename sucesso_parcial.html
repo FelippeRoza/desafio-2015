@@ -10,23 +10,34 @@
 </head>
 <body>
 
-	<h1>My First Heading</h1>
-	<p>My first paragraph.</p>
+	<h1>Felippe Maneiro</h1>
+	<p id="test1">This is a paragraph.</p>
+	<!-- <img id = "image1" src="http://www.sadia.com.br/files/receitas/20100713184443614.jpg"> -->
 
-
-
+	<ul id="imagesList">
+  		<li>No images found</li>
+	</ul>
 <script>
-
+	var imgList= "";
 	var json = eval(jsonstring);
   	console.log(json);
   	console.log(json["data"]["recommendation"]);
   	var recommendations = json["data"]["recommendation"];
 
-  	// for (var i = recommendations.length - 1; i >= 0; i--) {
-   //  	document.write(recommendations[i][1]);
-  	// };
   	document.write(recommendations['0'].name);
-
+  	document.write('\nPreco: ' + recommendations['0'].price);
+  	//load image array
+    var images_test = {};
+    for (var i = recommendations.length - 1; i >= 0; i--) {
+    	images_test['image'+i] = 'http:'+recommendations[i].imageName;
+    };
+  	console.log(images_test);
+  	var images = {'image1':'http:'+recommendations['0'].imageName,'image2':'http:'+recommendations['1'].imageName};
+    $.each(images_test, function(){
+    	document.write(this);
+    	$('#imagesList').append('<li><img src="' + this + '" /></li>'); 
+	});
+	document.write()
 </script>
 </body>
 

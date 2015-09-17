@@ -1,29 +1,39 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Loja do Felippe</title>
-
 	<script src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/data.js" charset="utf-8"></script>
-	<!-- // <script src="js/data.js"></script> -->
-
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen"> 
 </head>
 <body>
 
-	<h1>Felippe Maneiro</h1>
-
-	<!-- Estrutura do produto -->
-	<p id="mainName"></p>
-	<img src='' id="mainImage"/>
-	<p id="mainOldPrice"></p>
-	<p id="mainPrice"></p>
-	<p id="mainUrl"></p>
-	<p id="mainPrice"></p>
-	<p id="mainPayment"></p>	
-	
-	<ul id="imagesList"></ul>
+    <div id="container">
+        <div id="header">
+            <h1>Loja Maneira do Felippe</h1>
+        </div>
+        <div id="image">
+                <img src='' id="mainImage"/>
+        </div>
+        <div id="mainDescription">
+            <p id="mainName"></p>
+            <p class = "small" id="mainId"></p>
+            <a id = "mainUrl" href="">ir para site</a>
+            <p><del id="mainOldPrice"></del></p>
+            <p class = "mainPrice" id="mainPrice"></p>
+            <p>à vista</p>
+            <p id="mainUrl"></p>
+            <ul id="mainPayment"></ul>
+            
+        </div>    
+        <div id="related">
+            <ul id="imagesList"></ul>
+        </div>
+        <div id="footer">
+            <p>Sites minimalistas são o futuro</p>
+        </div>
+    </div>
 
 <script>
 	var json = eval(jsonstring);
@@ -33,24 +43,27 @@
   	
   	//Preenchimento dos dados do produto principal
  
-  	$("#mainName").text(mainItem.name);
+  	$("#mainName").text(mainItem.name);    
+    $("#mainId").text("(Cód. item "+mainItem.businessId+")");
   	$("#mainImage").attr("src",'http:' + mainItem.imageName);
-  	$("#mainOldPrice").text('Preço antigo:' + mainItem.oldPrice);
-  	$("#mainUrl").text(mainItem.datailUrl);
-  	$("#mainPrice").text('Preço novo: ' + mainItem.price + ' à vista');
-  	$("#mainPayment").text(mainItem["productInfo"].paymentConditions);
+  	$("#mainOldPrice").text(mainItem.oldPrice);
+    $("#mainUrl").attr("href","http:"+mainItem.detailUrl);
+  	$("#mainPrice").text(mainItem.price);
+  	$("#mainPayment").append(mainItem["productInfo"].paymentConditions);
 
-  	//load image array
+  	//Preenchimento dos produtos recomendados
     var images_test = {};
     for (var i = recommendations.length - 1; i >= 0; i--) {
-    	images_test['image'+i] = 'http:'+recommendations[i].imageName;
+    	// images_test['image'+i] = 'http:'+recommendations[i].imageName;
+        imageUrl = 'http:'+recommendations[i].imageName;
+        description = recommendations[i].name;
+        price = recommendations[i].price;
+        urlRef = recommendations[i].detailUrl;
+        $('#imagesList').append('<div class="floating-box"><img src="' + imageUrl + '" /><a href=http:'+urlRef+'>'+description+'</p><p class="price">'+price+'</p></div>');
     };
-  	console.log(images_test);
-  	$.each(images_test, function(){
-    	$('#imagesList').append('<li><img src="' + this + '" /></li>'); 
-	});
 
 </script>
+
 </body>
 
 </html);>
